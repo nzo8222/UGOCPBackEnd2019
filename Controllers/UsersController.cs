@@ -20,12 +20,29 @@ namespace UGOCPBackEnd2019.Controllers
 
         [HttpPost]
         [Route("Registro")]
-        public async Task<IActionResult> RegistroUsuario([FromBody]LoginUsuarioViewModel usuario)
+        public async Task<IActionResult> RegistroUsuario([FromBody]RegisterUserViewModel usuario)
         {
             var user = new User
             {
+                
                 Id = Guid.NewGuid(),
-                UserName = usuario.Usuario
+                UserName = usuario.Usuario,
+                Email = usuario.Email,
+                PhoneNumber = usuario.PhoneNumber,
+                Address = usuario.Address,
+                Zone = usuario.Zone,
+                State = usuario.State,
+                Municipality = usuario.Municipality,
+                Town = usuario.Town,
+                CellPhone = usuario.CellPhone,
+                Age = usuario.Age,
+                Gender = usuario.Gender,
+                CivilStatus = usuario.CivilStatus,
+                Ocupation = usuario.Ocupation,
+                Charge = usuario.Charge,
+                CURP = usuario.CURP,
+                ClaveDeElector = usuario.ClaveDeElector,
+                NumberINECredential = usuario.NumberINECredential
             };
 
             var result = await _usrMngr.CreateAsync(user, usuario.Password);
