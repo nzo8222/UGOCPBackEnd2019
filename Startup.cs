@@ -33,7 +33,7 @@ namespace UGOCPBackEnd2019
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddDbContext<cat_localidadContext>(o => o.UseSqlServer(Configuration.GetConnectionString("LocalidadConnection")));
             services.AddDbContext<UgocpDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 

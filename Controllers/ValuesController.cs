@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using UGOCPBackEnd2019.Data;
 
 namespace UGOCPBackEnd2019.Controllers
 {
@@ -10,11 +11,18 @@ namespace UGOCPBackEnd2019.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly cat_localidadContext _context;
+        public ValuesController(cat_localidadContext ctx)
+        {
+            _context = ctx;
+        }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        //public async Task<IActionResult> RegistroUsuario([FromBody]RegisterUserViewModel usuario)
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            var localidades = _context.Localidades.FirstOrDefault(l => l.Nombre == "Ciudad Obregón");
+            return new OkObjectResult(localidades);
         }
 
         // GET api/values/5
