@@ -41,8 +41,22 @@ namespace UGOCPBackEnd2019.Controllers
         {
             try
             {
-                var municipios =  _contextLocalidad.Municipios.Where(m => m.EstadoId == idEstadoFromFachada.EstadoId);
+                var municipios =  _contextLocalidad.Municipios.Where(m => m.EstadoId == idEstadoFromFachada.Id);
                 return this.OkResponse(municipios);
+            }
+            catch(Exception ex)
+            {
+                return this.BadResponse(ex.ToString());
+            }
+        }
+        [HttpPost]
+        [Route("GetLocalidades")]
+        public async Task<IActionResult> GetLocalidad([FromBody]LocalidadViewModel idMunicipioFromFachada)
+        {
+            try
+            {
+                var localidades = _contextLocalidad.Localidades.Where(l => l.MunicipioId == idMunicipioFromFachada.Id);
+                return this.OkResponse(localidades);
             }
             catch(Exception ex)
             {

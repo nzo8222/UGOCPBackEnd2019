@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace UGOCPBackEnd2019.Models
 {
-    public class MunicipioViewModel
+    public class LocalidadViewModel
     {
         public int Id { get; set; }
     }
