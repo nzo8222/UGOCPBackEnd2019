@@ -9,12 +9,9 @@ namespace UGOCPBackEnd2019.Models
 {
     public class User: IdentityUser<Guid>
     {
-        
+        public string FullName { get; set; }
         public string Address { get; set; }
-        public string Zone { get; set; }
-        public string State { get; set; }
-        public string Municipality { get; set; }
-        public string Town { get; set; }
+        public int IdLocalidad { get; set; }
         public string CellPhone { get; set; }
         public string Age { get; set; }
         public string Gender { get; set; }
