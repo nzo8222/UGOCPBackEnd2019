@@ -3,7 +3,6 @@ C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\bin\Debu
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\bin\Debug\netcoreapp2.2\UGOCPBackEnd2019.runtimeconfig.dev.json
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\bin\Debug\netcoreapp2.2\UGOCPBackEnd2019.dll
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\bin\Debug\netcoreapp2.2\UGOCPBackEnd2019.pdb
-C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.csprojAssemblyReference.cache
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.csproj.CoreCompileInputs.cache
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.RazorAssemblyInfo.cache
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.RazorAssemblyInfo.cs
@@ -12,3 +11,4 @@ C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debu
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.RazorTargetAssemblyInfo.cache
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.dll
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.pdb
+C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.csprojAssemblyReference.cache

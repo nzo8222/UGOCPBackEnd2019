@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UGOCPBackEnd2019.Data;
 
 namespace UGOCPBackEnd2019.Migrations
 {
     [DbContext(typeof(UgocpDbContext))]
-    partial class UgocpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190806185237_ModificacionModeloProductoSeAgregoCampoClaveProducto")]
+    partial class ModificacionModeloProductoSeAgregoCampoClaveProducto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,6 +183,8 @@ namespace UGOCPBackEnd2019.Migrations
 
                     b.Property<string>("Address");
 
+                    b.Property<string>("Age");
+
                     b.Property<string>("CURP");
 
                     b.Property<string>("CellPhone");
@@ -193,8 +197,6 @@ namespace UGOCPBackEnd2019.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);

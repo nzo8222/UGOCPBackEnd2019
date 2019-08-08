@@ -3,19 +3,21 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UGOCPBackEnd2019.Data;
 
 namespace UGOCPBackEnd2019.Migrations
 {
     [DbContext(typeof(UgocpDbContext))]
-    partial class UgocpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190801184050_CambiosModeloUsuarioCompañia")]
+    partial class CambiosModeloUsuarioCompañia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -129,8 +131,6 @@ namespace UGOCPBackEnd2019.Migrations
 
                     b.Property<string>("Calidad");
 
-                    b.Property<int>("ClaveProductoServicio");
-
                     b.Property<Guid?>("CompanyIdCompany");
 
                     b.Property<int>("CuantityInKG");
@@ -181,6 +181,8 @@ namespace UGOCPBackEnd2019.Migrations
 
                     b.Property<string>("Address");
 
+                    b.Property<string>("Age");
+
                     b.Property<string>("CURP");
 
                     b.Property<string>("CellPhone");
@@ -193,8 +195,6 @@ namespace UGOCPBackEnd2019.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);

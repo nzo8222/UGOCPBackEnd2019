@@ -16,7 +16,7 @@ using UGOCPBackEnd2019.Services.Models;
 namespace UGOCPBackEnd2019.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly UserManager<User> _usrMngr;
@@ -116,9 +116,9 @@ namespace UGOCPBackEnd2019.Controllers
             {
                 return this.BadResponse("No se encontro al usuario.");
             }
-            user.Municipality = modelo.Municipality;
+            //user.Municipality = modelo.Municipality;
             user.Address = modelo.Address;
-            user.Age = modelo.Age;
+            //user.Age = modelo.Age;
 
             await _context.SaveChangesAsync();
 

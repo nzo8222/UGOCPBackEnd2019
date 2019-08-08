@@ -13,7 +13,7 @@ namespace UGOCPBackEnd2019.Models
         public string Address { get; set; }
         public int IdLocalidad { get; set; }
         public string CellPhone { get; set; }
-        public string Age { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
         public string CivilStatus { get; set; }
         public string Ocupation { get; set; }

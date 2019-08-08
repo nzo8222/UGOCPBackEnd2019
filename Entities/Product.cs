@@ -8,6 +8,7 @@ namespace UGOCPBackEnd2019.Entities
     public class Product
     {
         public Guid IdProduct { get; set; }
+        public int ClaveProductoServicio { get; set; }
         public string Name { get; set; }
         public string Calidad { get; set; }
         public DateTime StartOfHarvest { get; set; }
