@@ -41,22 +41,7 @@ namespace UGOCPBackEnd2019.Controllers
                 
                 Id = Guid.NewGuid(),
                 UserName = usuario.Usuario,
-                Email = usuario.Email,
-                //PhoneNumber = usuario.PhoneNumber,
-                //Address = usuario.Address,
-                //Zone = usuario.Zone,
-                //State = usuario.State,
-                //Municipality = usuario.Municipality,
-                //Town = usuario.Town,
-                //CellPhone = usuario.CellPhone,
-                //Age = usuario.Age,
-                //Gender = usuario.Gender,
-                //CivilStatus = usuario.CivilStatus,
-                //Ocupation = usuario.Ocupation,
-                //Charge = usuario.Charge,
-                //CURP = usuario.CURP,
-                //ClaveDeElector = usuario.ClaveDeElector,
-                //NumberINECredential = usuario.NumberINECredential
+                Email = usuario.Email
             };
             var result = await _usrMngr.CreateAsync(user, usuario.Password);
             
@@ -105,25 +90,42 @@ namespace UGOCPBackEnd2019.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("UpdateUser")]
         public async Task<IActionResult> UpdateUser([FromBody] ModeloUpdateUsuario modelo)
         {
-            // Busca al usuario.
-            var user = _context.Users.FirstOrDefault(u => u.Id == modelo.Id);
-
-            if(user == null)
+            try
             {
-                return this.BadResponse("No se encontro al usuario.");
+                // Busca al usuario.
+                var user = _context.Users.FirstOrDefault(u => u.Id == modelo.Id);
+
+                if (user == null)
+                {
+                    return this.BadResponse("No se encontro al usuario.");
+                }
+
+                user.FullName = modelo.FullName;
+                user.Address = modelo.Address;
+                user.IdLocalidad = modelo.IdLocalidad;
+                user.CellPhone = modelo.CellPhone;
+                user.PhoneNumber = modelo.PhoneNumber;
+                user.DateOfBirth = modelo.DateOfBirth;
+                user.Gender = modelo.Gender;
+                user.CivilStatus = modelo.CivilStatus;
+                user.Ocupation = modelo.Ocupation;
+                user.Charge = modelo.Charge;
+                user.CURP = modelo.CURP;
+                user.ClaveDeElector = modelo.ClaveDeElector;
+                user.NumberINECredential = modelo.NumberINECredential;
+
+                await _context.SaveChangesAsync();
+
+                return this.OkResponse("Se actualizaron los cambios correctamente.");
             }
-            //user.Municipality = modelo.Municipality;
-            user.Address = modelo.Address;
-            //user.Age = modelo.Age;
-
-            await _context.SaveChangesAsync();
-
-            return this.OkResponse("Se actualizaron los cambios correctamente.");
-
+            catch(Exception ex)
+            {
+                return this.BadResponse(ex.ToString());
+            }
         }
 
         // Config JWT.

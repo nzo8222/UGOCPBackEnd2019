@@ -25,5 +25,6 @@ namespace UGOCPBackEnd2019.Models
         public string CURP { get; set; }
         public string ClaveDeElector { get; set; }
         public string NumberINECredential { get; set; }
+        public string Role { get; set; }
     }
 }

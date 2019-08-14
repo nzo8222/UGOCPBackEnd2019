@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UGOCPBackEnd2019.Data;
 
 namespace UGOCPBackEnd2019.Migrations
 {
     [DbContext(typeof(UgocpDbContext))]
-    partial class UgocpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190811004214_CambioModeloUsuarioAgregarRol")]
+    partial class CambioModeloUsuarioAgregarRol
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,8 +110,6 @@ namespace UGOCPBackEnd2019.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
-
-                    b.Property<int>("IdLocalidad");
 
                     b.Property<string>("Name");
 

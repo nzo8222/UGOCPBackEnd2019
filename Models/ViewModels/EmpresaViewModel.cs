@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UGOCPBackEnd2019.Entities
+namespace UGOCPBackEnd2019.Models.ViewModels
 {
-    public class Company
+    public class EmpresaViewModel
     {
-        public Company()
-        {
-                
-        }
-        public Guid IdCompany { get; set; }
+        public Guid IdUsuario { get; set; }
         public string Name { get; set; }
         public int PhoneNumber { get; set; }
         public string Address { get; set; }
         public int IdLocalidad { get; set; }
-        public List<Product> LstProduct { get; set; }
     }
 }

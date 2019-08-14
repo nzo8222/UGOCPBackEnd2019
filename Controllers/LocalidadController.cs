@@ -23,7 +23,7 @@ namespace UGOCPBackEnd2019.Controllers
 
         [HttpGet]
         [Route("GetEstados")]
-        public async Task<IActionResult> GetEstados()
+        public IActionResult GetEstados()
         {
             try
             {
@@ -37,7 +37,7 @@ namespace UGOCPBackEnd2019.Controllers
         }
         [HttpPost]
         [Route("GetMunicipios")]
-        public async Task<IActionResult> GetMunicipios([FromBody]MunicipioViewModel idEstadoFromFachada)
+        public IActionResult GetMunicipios([FromBody]MunicipioViewModel idEstadoFromFachada)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace UGOCPBackEnd2019.Controllers
         }
         [HttpPost]
         [Route("GetLocalidades")]
-        public async Task<IActionResult> GetLocalidad([FromBody]LocalidadViewModel idMunicipioFromFachada)
+        public IActionResult GetLocalidad([FromBody]LocalidadViewModel idMunicipioFromFachada)
         {
             try
             {

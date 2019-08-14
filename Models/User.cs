@@ -22,5 +22,6 @@ namespace UGOCPBackEnd2019.Models
         public string ClaveDeElector { get; set; }
         public string NumberINECredential { get; set; }
         public List<Company> LstCompany { get; set; }
+        public string Role { get; set; }
     }
 }

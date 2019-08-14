@@ -24,7 +24,7 @@ namespace UGOCPBackEnd2019
             if (!optionsBuilder.IsConfigured)
             {
               // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=cat_localidad;User Id=gonzo;Password=2185021;");
+                optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=cat_localidad;User Id=gonzo;Password=Gonzalo@92;");
             }
         }
 
