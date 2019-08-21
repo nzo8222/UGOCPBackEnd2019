@@ -11,5 +11,5 @@ C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debu
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.RazorTargetAssemblyInfo.cache
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.dll
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.pdb
-C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.csprojAssemblyReference.cache
 C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\bin\Debug\netcoreapp2.2\Data\ClaveProdServ.dat
+C:\Users\Gonzo\Documents\UGOCPBackEnd\UGOCPBackEnd2019\UGOCPBackEnd2019\obj\Debug\netcoreapp2.2\UGOCPBackEnd2019.csprojAssemblyReference.cache

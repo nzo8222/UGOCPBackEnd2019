@@ -36,6 +36,8 @@ namespace UGOCPBackEnd2019.Data
         {
             // Define primary key.
             builder.HasKey(c => c.IdCompany);
+
+            builder.HasMany(p => p.LstProduct);
         }
         public void ConfigureUser(EntityTypeBuilder<User> builder)
         {
@@ -47,6 +49,7 @@ namespace UGOCPBackEnd2019.Data
         {
             builder.HasKey(p => p.IdProduct);
 
+            
         }
     }
 }
