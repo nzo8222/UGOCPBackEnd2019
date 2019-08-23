@@ -19,7 +19,7 @@ namespace UGOCPBackEnd2019.Entities
         public DateTime StartOfHarvest { get; set; }
         public DateTime EndOfHarvest { get; set; }
         public int CuantityInKG { get; set; }
-        [ForeignKey("CompanyIdCompany")]
-        public Company Compañia { get; set; }
+        //[ForeignKey("CompanyIdCompany")]
+        //public Company Compañia { get; set; }
     }
 }

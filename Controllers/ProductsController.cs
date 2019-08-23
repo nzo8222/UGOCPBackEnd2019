@@ -71,9 +71,11 @@ namespace UGOCPBackEnd2019.Controllers
                     return this.BadResponse("No se encontro al usuario.");
                 }
 
-                var empresa = user.LstCompany.FirstOrDefault(lc => lc.IdCompany == model.IdEmpresa).LstProduct;
-                // user.LstCompany.FirstOrDefault(lc => lc.IdCompany == model.IdEmpresa);
-                var lstProductos = empresa;
+                var lstProductos = user.LstCompany.FirstOrDefault(lc => lc.IdCompany == model.IdEmpresa).LstProduct;
+                if (lstProductos.Count() == 0)
+                {
+                    return this.BadResponse("Esta empresa no tiene productos registrados.");
+                }
                 return this.OkResponse(lstProductos);
             }
             catch(Exception ex)
