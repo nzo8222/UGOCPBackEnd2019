@@ -16,10 +16,10 @@ namespace UGOCPBackEnd2019.Extensions
                 Payload = payload
             });
         }
-
-        public static BadRequestObjectResult BadResponse(this ControllerBase controller, string errorMessage)
+        //BadRequestObjectResult
+        public static OkObjectResult BadResponse(this ControllerBase controller, string errorMessage)
         {
-            return new BadRequestObjectResult(new RespuestaServidor
+            return new OkObjectResult(new RespuestaServidor
             {
                 Exitoso = false,
                 MensajeError = errorMessage

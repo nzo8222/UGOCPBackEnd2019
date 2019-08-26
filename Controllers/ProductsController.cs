@@ -20,6 +20,77 @@ namespace UGOCPBackEnd2019.Controllers
         {
             _contextUGOCP = ctx;
         }
+
+
+        [HttpPost]
+        [Route("DeleteProduct")]
+        public IActionResult DeleteProducto([FromBody] DeleteProductoViewModel model)
+        {
+            try
+            {
+                var user = _contextUGOCP.Users
+                         .Include(u => u.LstCompany)
+                         .ThenInclude(p => p.LstProduct)
+                         .Where(u => u.Id == model.IdUsuario).FirstOrDefault();
+                if (user == null)
+                {
+                    return this.BadResponse("No se encontro al usuario.");
+                }
+
+                var lstProductos = user.LstCompany.FirstOrDefault(lc => lc.IdCompany == model.IdEmpresa).LstProduct;
+                var producto = lstProductos.FirstOrDefault(p => p.IdProduct == model.IdProducto);
+                _contextUGOCP.Remove(producto);
+                _contextUGOCP.SaveChanges();
+                return this.OkResponse("Se elimino el producto correctamente.");
+            }
+            catch(Exception ex)
+            {
+                return this.BadResponse(ex.ToString());
+            }
+        }
+
+
+
+
+        [HttpPost]
+        [Route("UpdateProduct")]
+        public IActionResult UpdateProducto([FromBody] UpdateProductoViewModel model)
+        {
+            try
+            {
+                var user = _contextUGOCP.Users
+                          .Include(u => u.LstCompany)
+                          .ThenInclude(p => p.LstProduct)
+                          .Where(u => u.Id == model.IdUsuario).FirstOrDefault();
+                if (user == null)
+                {
+                    return this.BadResponse("No se encontro al usuario.");
+                }
+
+                var lstProductos = user.LstCompany.FirstOrDefault(lc => lc.IdCompany == model.IdEmpresa).LstProduct;
+                var producto = lstProductos.FirstOrDefault(p => p.IdProduct == model.IdProducto);
+                if(producto == null)
+                {
+                    return this.BadResponse("No se encontro el producto.");
+                }
+                producto.Name = model.Name;
+                producto.StartOfHarvest = model.StartOfHarvest;
+                producto.EndOfHarvest = model.EndOfHarvest;
+                producto.Calidad = model.Calidad;
+                producto.ClaveProductoServicio = model.ClaveProductoServicio;
+                producto.CuantityInKG = model.CuantityInKG;
+                _contextUGOCP.Update(producto);
+                _contextUGOCP.SaveChanges();
+
+                return this.OkResponse("Se guardaron los cambios correctamente.");
+            }
+            catch(Exception ex)
+            {
+                return this.BadResponse(ex.ToString());
+            }
+        }
+
+
         [HttpPost]
         [Route("PostProduct")]
         public IActionResult PostProducto([FromBody] PostProductoViewModel model)
@@ -52,7 +123,7 @@ namespace UGOCPBackEnd2019.Controllers
             }
             catch(Exception ex)
             {
-               return this.BadRequest(ex.ToString());
+               return this.BadResponse(ex.ToString());
             }
         }
         [HttpPost]
@@ -80,7 +151,7 @@ namespace UGOCPBackEnd2019.Controllers
             }
             catch(Exception ex)
             {
-                return this.BadRequest(ex.ToString());
+                return this.BadResponse(ex.ToString());
             }
         }
 

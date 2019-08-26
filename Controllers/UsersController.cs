@@ -32,6 +32,26 @@ namespace UGOCPBackEnd2019.Controllers
             _jwtOptions = jwtOptions.Value;
         }
 
+        [HttpGet("{IdUsuario}")]
+        public IActionResult GetUserData([FromRoute] Guid IdUsuario)
+        {
+            try
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == IdUsuario);
+
+                if (user == null)
+                {
+                    return this.BadResponse("No se encontro al usuario.");
+                }
+                  return this.OkResponse(user);
+            }
+            catch(Exception ex)
+            {
+                  return this.BadResponse(ex.ToString());
+            }
+        }
+
+
         [HttpPost]
         [Route("Registro")]
         public async Task<IActionResult> RegistroUsuario([FromBody]RegisterUserViewModel usuario)
