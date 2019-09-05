@@ -12,6 +12,8 @@ using UGOCPBackEnd2019.Helpers;
 using UGOCPBackEnd2019.Models;
 using UGOCPBackEnd2019.Services;
 using UGOCPBackEnd2019.Services.Models;
+using Microsoft.EntityFrameworkCore;
+using UGOCPBackEnd2019.Models.ViewModels;
 
 namespace UGOCPBackEnd2019.Controllers
 {
@@ -23,13 +25,15 @@ namespace UGOCPBackEnd2019.Controllers
         private readonly IJwtFactory _jwtFactory;
         private readonly JwtIssuerOptions _jwtOptions;
         private readonly UgocpDbContext _context;
+        private readonly cat_localidadContext _ctxLocalidad;
 
-        public UsersController(UserManager<User> manager, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions, UgocpDbContext ctx)
+        public UsersController(UserManager<User> manager, IJwtFactory jwtFactory, IOptions<JwtIssuerOptions> jwtOptions, UgocpDbContext ctx, cat_localidadContext _localidadContext)
         {
             _context = ctx;
             _usrMngr = manager;
             _jwtFactory = jwtFactory;
             _jwtOptions = jwtOptions.Value;
+            _ctxLocalidad = _localidadContext;
         }
 
         [HttpGet("{IdUsuario}")]
@@ -43,7 +47,29 @@ namespace UGOCPBackEnd2019.Controllers
                 {
                     return this.BadResponse("No se encontro al usuario.");
                 }
-                  return this.OkResponse(user);
+
+                var localidad = _ctxLocalidad.Localidades.FirstOrDefault(l => l.Id == user.IdLocalidad);
+                var municipio = _ctxLocalidad.Municipios.FirstOrDefault(m => m.Id == localidad.MunicipioId);
+                var estado = _ctxLocalidad.Estados.FirstOrDefault(e => e.Id == municipio.EstadoId);
+
+                DatosUsuarioViewModel DatosUsuarioVM = new DatosUsuarioViewModel();
+                DatosUsuarioVM.Address = user.Address;
+                DatosUsuarioVM.CellPhone = user.CellPhone;
+                DatosUsuarioVM.Charge = user.Charge;
+                DatosUsuarioVM.CivilStatus = user.CivilStatus;
+                DatosUsuarioVM.ClaveDeElector = user.ClaveDeElector;
+                DatosUsuarioVM.CURP = user.CURP;
+                DatosUsuarioVM.DateOfBirth = user.DateOfBirth;
+                DatosUsuarioVM.Estado = estado.Nombre;
+                DatosUsuarioVM.FullName = user.FullName;
+                DatosUsuarioVM.Gender = user.Gender;
+                DatosUsuarioVM.Localidad = localidad.Nombre;
+                DatosUsuarioVM.Municipio = municipio.Nombre;
+                DatosUsuarioVM.NumberINECredential = user.NumberINECredential;
+                DatosUsuarioVM.Ocupation = user.Ocupation;
+                DatosUsuarioVM.PhoneNumber = user.PhoneNumber;
+
+                  return this.OkResponse(DatosUsuarioVM);
             }
             catch(Exception ex)
             {
