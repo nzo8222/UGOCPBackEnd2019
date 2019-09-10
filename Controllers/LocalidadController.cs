@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UGOCPBackEnd2019.Extensions;
 using UGOCPBackEnd2019.Models;
+using UGOCPBackEnd2019.Models.ViewModels;
 
 namespace UGOCPBackEnd2019.Controllers
 {
@@ -19,6 +20,27 @@ namespace UGOCPBackEnd2019.Controllers
         public LocalidadController(cat_localidadContext ctx)
         {
             _contextLocalidad = ctx;
+        }
+        [HttpGet("{IdLocalidad}")]
+        [Route("GetLocationData/{IdLocalidad}")]
+        public IActionResult GetDataLocacion([FromRoute] int IdLocalidad)
+        {
+            try
+            {
+                DatosLocalidadViewModel Datos = new DatosLocalidadViewModel();
+                var localidad = _contextLocalidad.Localidades.FirstOrDefault(l => l.Id == Convert.ToInt32(IdLocalidad));
+                var municipio = _contextLocalidad.Municipios.FirstOrDefault(m => m.Id == localidad.MunicipioId);
+                var estado = _contextLocalidad.Estados.FirstOrDefault(e => e.Id == municipio.EstadoId);
+                Datos.Estado = estado.Nombre;
+                Datos.Municipio = municipio.Nombre;
+                Datos.Localidad = localidad.Nombre;
+                return this.OkResponse(Datos);
+            }
+            catch(Exception ex)
+            {
+                return this.BadResponse(ex.ToString());
+            }
+            
         }
 
         [HttpGet]

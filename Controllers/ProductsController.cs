@@ -169,5 +169,22 @@ namespace UGOCPBackEnd2019.Controllers
             return this.OkResponse(productos);
 
         }
+
+        [HttpGet("{claveSat}")]
+        [Route("GetCategoriaSat/{claveSat}")]
+        public IActionResult GetClaveSat([FromRoute] string claveSat)
+        {
+            var claveProdServ = new ClaveProdServ();
+            var lstClaves = claveProdServ.GetList();
+
+            var productos = lstClaves
+                .FirstOrDefault(p => p.Codigo == claveSat);
+                //.Where(p => p.Descripcion.Contains(claveSat))
+                //.Take(15)
+                //.ToArray();
+
+            return this.OkResponse(productos);
+
+        }
     }
 }

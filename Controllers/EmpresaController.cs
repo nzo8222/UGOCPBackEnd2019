@@ -15,9 +15,11 @@ namespace UGOCPBackEnd2019.Controllers
     public class EmpresaController : ControllerBase
     {
         private readonly UgocpDbContext _contextUGOCP;
-        public EmpresaController(UgocpDbContext ctx)
+        private readonly cat_localidadContext _contextLocalidad;
+        public EmpresaController(UgocpDbContext ctx, cat_localidadContext ctxLocalidad)
         {
             _contextUGOCP = ctx;
+            _contextLocalidad = ctxLocalidad;
         }
         [HttpPost]
         [Route("DeleteEmpresa")]
@@ -60,6 +62,8 @@ namespace UGOCPBackEnd2019.Controllers
                 empresa.PhoneNumber = empresaModel.PhoneNumber;
                 empresa.Address = empresaModel.Address;
                 empresa.IdLocalidad = empresaModel.IdLocalidad;
+                var localidad = _contextLocalidad.Localidades.FirstOrDefault(l => l.Id == empresaModel.IdLocalidad);
+                empresa.localidad = localidad.Nombre;
                 _contextUGOCP.Update(empresa);
                 _contextUGOCP.SaveChanges();
                 return this.OkResponse("Cambios Guardados correctamente.");
@@ -85,13 +89,23 @@ namespace UGOCPBackEnd2019.Controllers
                 {
                     return this.BadResponse("No se encontro al usuario.");
                 }
+                var companies = user.LstCompany.ToList();
+                foreach(var comp in companies)
+                {
+                    if(empresaModel.Name == comp.Name)
+                    {
+                        return this.BadResponse("Ya existe una compañia con ese nombre");
+                    }
+                }
                 Company company = new Company();
                 company.IdCompany = Guid.NewGuid();
                 company.Name = empresaModel.Name;
                 company.PhoneNumber = empresaModel.PhoneNumber;
                 company.Address = empresaModel.Address;
                 company.IdLocalidad = empresaModel.IdLocalidad;
-                if(user.LstCompany == null)
+                var localidad = _contextLocalidad.Localidades.FirstOrDefault(l => l.Id == empresaModel.IdLocalidad);
+                company.localidad = localidad.Nombre;
+                if (user.LstCompany == null)
                 {
                     user.LstCompany = new List<Company>();
                 }
@@ -109,19 +123,53 @@ namespace UGOCPBackEnd2019.Controllers
 
         [HttpGet("{IdUsuario}")]
         public IActionResult GetEmpresas([FromRoute] Guid IdUsuario)
-        {
-           
-            var user = _contextUGOCP.Users
-                           .Include(u => u.LstCompany)
-                           .Where(u => u.Id == IdUsuario).FirstOrDefault(); ;
-
-            if (user == null)
+       {
+            try
             {
-                return this.BadResponse("No se encontro al usuario.");
+                var user = _contextUGOCP.Users
+                          .Include(u => u.LstCompany)
+                          .Where(u => u.Id == IdUsuario).FirstOrDefault(); ;
+
+                if (user == null)
+                {
+                    return this.BadResponse("No se encontro al usuario.");
+                }
+
+                if(user.LstCompany.Count() == 0)
+                {
+                    return this.BadResponse("Este usuario no tiene empresas registradas.");
+                }
+                List<EmpresaProductCountViewModel> listaEmpresasConProductos = new List<EmpresaProductCountViewModel>();
+                EmpresaProductCountViewModel empresaConProductos = new EmpresaProductCountViewModel();
+                var listaCompany = user.LstCompany.ToList();
+
+                foreach(var company in listaCompany)
+                {
+                    empresaConProductos.Address = company.Address;
+                    empresaConProductos.IdCompany = company.IdCompany;
+                    empresaConProductos.IdLocalidad = company.IdLocalidad;
+                    empresaConProductos.localidad = company.localidad;
+                    empresaConProductos.Name = company.Name;
+                    empresaConProductos.PhoneNumber = company.PhoneNumber;
+                    if(company.LstProduct == null)
+                    {
+                        empresaConProductos.ProductCount = 0;
+                    }
+                    else
+                    {
+                        empresaConProductos.ProductCount = company.LstProduct.Count();
+                    }
+                    
+                    listaEmpresasConProductos.Add(empresaConProductos);
+                }
+                return this.OkResponse(listaEmpresasConProductos);
             }
-
-
-            return this.OkResponse(user.LstCompany.ToList());
+            catch(Exception ex)
+            {
+                return this.BadRequest(ex.ToString());
+            }
         }
+
+
     }
 }
