@@ -128,6 +128,7 @@ namespace UGOCPBackEnd2019.Controllers
             {
                 var user = _contextUGOCP.Users
                           .Include(u => u.LstCompany)
+                          .ThenInclude(p => p.LstProduct)
                           .Where(u => u.Id == IdUsuario).FirstOrDefault(); ;
 
                 if (user == null)

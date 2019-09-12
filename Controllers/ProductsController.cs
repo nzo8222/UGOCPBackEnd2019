@@ -99,12 +99,20 @@ namespace UGOCPBackEnd2019.Controllers
             {
                 var user = _contextUGOCP.Users
                             .Include(u => u.LstCompany)
+                            .ThenInclude(p => p.LstProduct)
                             .Where(u => u.Id == model.IdUsuario).FirstOrDefault();
                 if (user == null)
                 {
                     return this.BadResponse("No se encontro al usuario.");
                 }
                 var empresa = user.LstCompany.FirstOrDefault(lc => lc.IdCompany == model.IdEmpresa);
+                foreach(var prod in empresa.LstProduct)
+                {
+                    if(model.Name == prod.Name)
+                    {
+                        return this.BadResponse("Ya existe un producto con ese nombre.");
+                    }
+                }
                 Product product = new Product();
                 product.IdProduct = Guid.NewGuid();
                 product.Name = model.Name;
@@ -156,6 +164,7 @@ namespace UGOCPBackEnd2019.Controllers
         }
 
         [HttpGet("{filter}")]
+        [Route("filter/{filter}")]
         public IActionResult GetProductosByFilter([FromRoute] string filter)
         {
             var claveProdServ = new ClaveProdServ();
