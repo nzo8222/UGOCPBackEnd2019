@@ -29,6 +29,8 @@ namespace UGOCPBackEnd2019.Data
             modelBuilder.Entity<Company>(ConfigureCompany);
             // Configure Product.
             modelBuilder.Entity<Product>(ConfigureProduct);
+            // Configure Months.
+            modelBuilder.Entity<Month>(ConfigureMonths);
         }
 
         // Funciones para configurar las entidadas.
@@ -48,6 +50,12 @@ namespace UGOCPBackEnd2019.Data
         public void ConfigureProduct(EntityTypeBuilder<Product> builder)
         {
             builder.HasKey(p => p.IdProduct);
+
+            builder.HasMany(p => p.LstMonthsOfHarvest);
+        }
+        public void ConfigureMonths(EntityTypeBuilder<Month> builder)
+        {
+            builder.HasKey(p => p.Id);
 
             
         }

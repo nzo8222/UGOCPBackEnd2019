@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UGOCPBackEnd2019.Data;
 
 namespace UGOCPBackEnd2019.Migrations
 {
     [DbContext(typeof(UgocpDbContext))]
-    partial class UgocpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190913193815_CambioModeloMes")]
+    partial class CambioModeloMes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,13 +151,11 @@ namespace UGOCPBackEnd2019.Migrations
 
                     b.Property<string>("Calidad");
 
-                    b.Property<string>("ClaveProductoServicio");
+                    b.Property<int>("ClaveProductoServicio");
 
                     b.Property<Guid?>("CompanyIdCompany");
 
                     b.Property<int>("CuantityInKG");
-
-                    b.Property<string>("DescripcionProductoServicio");
 
                     b.Property<string>("Name");
 

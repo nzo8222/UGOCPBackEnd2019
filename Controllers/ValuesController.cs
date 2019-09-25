@@ -17,9 +17,9 @@ namespace UGOCPBackEnd2019.Controllers
             _context = ctx;
         }
         // GET api/values
-        [HttpGet]
         //public async Task<IActionResult> RegistroUsuario([FromBody]RegisterUserViewModel usuario)
-        public async Task<IActionResult> Get()
+        [HttpGet]
+        public IActionResult Get()
         {
             var localidades = _context.Localidades.FirstOrDefault(l => l.Nombre == "Ciudad Obregón");
             return new OkObjectResult(localidades);

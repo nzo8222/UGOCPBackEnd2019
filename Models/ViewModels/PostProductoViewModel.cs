@@ -12,8 +12,10 @@ namespace UGOCPBackEnd2019.Models.ViewModels
         public int ClaveProductoServicio { get; set; }
         public string Name { get; set; }
         public string Calidad { get; set; }
-        public DateTime StartOfHarvest { get; set; }
-        public DateTime EndOfHarvest { get; set; }
+        public List<String> MonthsOfHarvest { get; set; }
+        //public DateTime StartOfHarvest { get; set; }
+        //public DateTime EndOfHarvest { get; set; }
         public int CuantityInKG { get; set; }
+        public string DescripcionProductoServicio { get; set; }
     }
 }

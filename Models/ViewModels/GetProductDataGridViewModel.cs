@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using UGOCPBackEnd2019.Entities;
 
-namespace UGOCPBackEnd2019.Entities
+namespace UGOCPBackEnd2019.Models.ViewModels
 {
-    public class Product
+    public class GetProductDataGridViewModel
     {
-        public Product()
+        public GetProductDataGridViewModel()
         {
 
         }
@@ -19,7 +19,5 @@ namespace UGOCPBackEnd2019.Entities
         public string Calidad { get; set; }
         public List<Month> LstMonthsOfHarvest { get; set; }
         public int CuantityInKG { get; set; }
-        //[ForeignKey("CompanyIdCompany")]
-        //public Company Compañia { get; set; }
     }
 }

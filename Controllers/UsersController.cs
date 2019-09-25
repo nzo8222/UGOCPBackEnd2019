@@ -131,7 +131,7 @@ namespace UGOCPBackEnd2019.Controllers
                 Email = user.Email,
                 ExpiresIn = jwt.ExpiresIn,
                 JwtToken = jwt.Auth_Token,
-                Role = null
+                Role = user.Role
             });
 
         }

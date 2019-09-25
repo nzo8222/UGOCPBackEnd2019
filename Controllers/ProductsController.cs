@@ -74,10 +74,10 @@ namespace UGOCPBackEnd2019.Controllers
                     return this.BadResponse("No se encontro el producto.");
                 }
                 producto.Name = model.Name;
-                producto.StartOfHarvest = model.StartOfHarvest;
-                producto.EndOfHarvest = model.EndOfHarvest;
+                //producto.StartOfHarvest = model.StartOfHarvest;
+                //producto.EndOfHarvest = model.EndOfHarvest;
                 producto.Calidad = model.Calidad;
-                producto.ClaveProductoServicio = model.ClaveProductoServicio;
+                producto.ClaveProductoServicio = model.ClaveProductoServicio.ToString();
                 producto.CuantityInKG = model.CuantityInKG;
                 _contextUGOCP.Update(producto);
                 _contextUGOCP.SaveChanges();
@@ -106,9 +106,9 @@ namespace UGOCPBackEnd2019.Controllers
                     return this.BadResponse("No se encontro al usuario.");
                 }
                 var empresa = user.LstCompany.FirstOrDefault(lc => lc.IdCompany == model.IdEmpresa);
-                foreach(var prod in empresa.LstProduct)
+                foreach (var prod in empresa.LstProduct)
                 {
-                    if(model.Name == prod.Name)
+                    if (model.Name == prod.Name)
                     {
                         return this.BadResponse("Ya existe un producto con ese nombre.");
                     }
@@ -116,11 +116,26 @@ namespace UGOCPBackEnd2019.Controllers
                 Product product = new Product();
                 product.IdProduct = Guid.NewGuid();
                 product.Name = model.Name;
-                product.ClaveProductoServicio = model.ClaveProductoServicio;
+                product.ClaveProductoServicio = model.ClaveProductoServicio.ToString();
                 product.Calidad = model.Calidad;
                 product.CuantityInKG = model.CuantityInKG;
-                product.StartOfHarvest = model.StartOfHarvest;
-                product.EndOfHarvest = model.EndOfHarvest;
+                product.DescripcionProductoServicio = model.DescripcionProductoServicio;
+                if(product.LstMonthsOfHarvest == null)
+                {
+                    product.LstMonthsOfHarvest = new List<Month>();
+                }
+
+                foreach(var mes in model.MonthsOfHarvest)
+                {
+                    Month month = new Month();
+                    month.Id = Guid.NewGuid();
+                    //month.Id = product.LstMonthsOfHarvest.Count();
+                    month.Name = mes.ToString();
+                    product.LstMonthsOfHarvest.Add(month);
+                }
+                
+                //product.StartOfHarvest = model.StartOfHarvest;
+                //product.EndOfHarvest = model.EndOfHarvest;
                 if(empresa.LstProduct == null)
                 {
                     empresa.LstProduct = new List<Product>();
@@ -143,6 +158,7 @@ namespace UGOCPBackEnd2019.Controllers
                 var user = _contextUGOCP.Users
                            .Include(u => u.LstCompany)
                            .ThenInclude(p => p.LstProduct)
+                           .ThenInclude(p => p.LstMonthsOfHarvest)
                            .Where(u => u.Id == model.IdUsuario).FirstOrDefault();
                 
                 if (user == null)
@@ -155,6 +171,7 @@ namespace UGOCPBackEnd2019.Controllers
                 {
                     return this.BadResponse("Esta empresa no tiene productos registrados.");
                 }
+                
                 return this.OkResponse(lstProductos);
             }
             catch(Exception ex)
